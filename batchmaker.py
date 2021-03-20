@@ -186,4 +186,4 @@ class Batchfile:
         
         """saving batchfile"""
         
-        sio.savemat('name'+'.mat', {'matlabbatch':self.matlabbatch})
+        sio.savemat(name+'.mat', {'matlabbatch':self.matlabbatch})

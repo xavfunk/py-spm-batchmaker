@@ -98,9 +98,9 @@ class Session:
     def __init__(self,
                  scans, #array of paths of scan files, ordered by session, ie for 2 sessions: shape 2x500
                  cond, #array of conditions, ie for 2 sessions shape 2x6
-                 multi_reg = [], #array of multi_reg paths
-                 multi = [],
-                 regress = [],
+                 multi_reg = None, #array of multi_reg paths
+                 multi = None,
+                 regress = None,
                  hpf = 128.0):
         
         """
@@ -112,6 +112,14 @@ class Session:
         hpf -> high-pass filter
         """        
         
+        if multi_reg is None:
+            multi_reg = []
+
+        if multi is None:
+            multi = []
+            
+        if regress is None:
+            regress = []
         
         dt = [('scans', np.object), ('cond', np.object), ('multi', np.object), 
               ('regress', np.object), ('multi_reg', np.object), ('hpf', np.float)]
@@ -147,7 +155,7 @@ class Batchfile:
                  dir,
                  timingParams, #insert timingParams Object here
                  sessions, #insert sessions object here
-                 fact = [],
+                 fact = None,
                  bases = [0,0], #This could be looked into to include more derivations of HRF
                  volt = 1.,
                  globale = 'None',
@@ -155,6 +163,9 @@ class Batchfile:
                  mask = np.array([''], dtype = np.object),
                  cvi = 'AR(1)'
                  ):
+        
+        if fact is None:
+            fact = []        
         
         self.dir = np.array(dir, dtype = np.object)
         self.timing = timingParams.mat
